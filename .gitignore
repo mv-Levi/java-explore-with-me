@@ -1,3 +1,4 @@
+# Java
 *.class
 *.log
 *.jar
@@ -11,12 +12,38 @@ hs_err_pid*
 replay_pid*
 out/
 target/
+build/
+
+# Maven wrapper
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### IntelliJ IDEA ###
+# IntelliJ IDEA
 .idea
 *.iws
 *.iml
 *.ipr
+
+# VS Code
+.vscode/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Spring Tool Suite
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# Custom project files
+HELP.md
+checkstyle.xml
