@@ -1,6 +1,5 @@
 package ru.practicum.compilation.controller;
 
-import ru.practicum.compilation.data.Compilation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
