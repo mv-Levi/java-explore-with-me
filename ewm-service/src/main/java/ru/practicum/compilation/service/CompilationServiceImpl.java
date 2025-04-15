@@ -22,12 +22,12 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class CompilationServiceImpl implements CompilationService {
     private final CompilationRepository compilationRepository;
     private final EventRepository eventRepository;
 
     @Override
-    @Transactional
     public CompilationDto createCompilation(NewCompilationDto newCompilationDto) {
         List<Event> events = newCompilationDto.getEvents() != null ?
                 eventRepository.findAllByIdIn(newCompilationDto.getEvents()) : null;
@@ -54,6 +54,7 @@ public class CompilationServiceImpl implements CompilationService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CompilationDto> getCompilationsByParams(Boolean pinned, int from, int size) {
         List<Compilation> compilations = pinned != null ?
                 compilationRepository.findAllByPinned(pinned, getPageable(from, size)) :
@@ -62,6 +63,7 @@ public class CompilationServiceImpl implements CompilationService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CompilationDto getCompilationById(long compId) {
         return CompilationMapper.toCompilationDto(compilationRepository.findById(compId).orElseThrow());
     }

@@ -17,24 +17,22 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     @Override
-    @Transactional
     public CategoryDto createCategory(NewCategoryDto newCategoryDto) {
         Category category = CategoryMapper.toCategory(newCategoryDto);
         return CategoryMapper.toCategoryDto(categoryRepository.save(category));
     }
 
     @Override
-    @Transactional
     public void deleteCategory(long catId) {
         categoryRepository.deleteById(catId);
     }
 
     @Override
-    @Transactional
     public CategoryDto patchCategory(CategoryDto categoryDto, long catId) {
         Category category = CategoryMapper.toCategory(categoryDto);
         category.setId(catId);
@@ -42,7 +40,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CategoryDto> getAllCategories(int from, int size) {
         Pageable page = PageRequest.of(from / size, size, Sort.by("id").ascending());
         return categoryRepository.findAll(page)
@@ -52,7 +50,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public CategoryDto findCategoryById(long catId) {
         return categoryRepository.findById(catId).map(CategoryMapper::toCategoryDto).orElseThrow();
     }
